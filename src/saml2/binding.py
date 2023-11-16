@@ -93,7 +93,10 @@ def http_redirect_message(message, location, relay_state="",
     if relay_state:
         args["RelayState"] = relay_state
         
-    login_url = "?".join([location, urllib.urlencode(args)])
+    # login_url = "?".join([location, urllib.urlencode(args)])
+    join_symbol = "&" if "?" in location else "?"
+    login_url = join_symbol.join([location, urllib.urlencode(args)])
+
     headers = [('Location', login_url)]
     body = [""]
     
